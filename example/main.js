@@ -1,55 +1,22 @@
-var ball = function(x,y,diameter) {
-  this.dx = 6;
-  this.dy = 6;
-  this.da = 1;
-  this.diameter = diameter;
+var g = new JSGame.game(function() {
+  var surf = new Surface(20,20,100,100);
 
-  this.surface = new Surface(x,y,diameter,diameter);
-  this.surface.colorFill(255,0,0,1);
-  this.surface.bindToStage();
-}
-
-ball.prototype.update = function() {
-  this.surface.translate(this.dx, this.dy, 0, this.da);
-  if (this.surface.x+this.diameter >= 640 || this.surface.x <= 0) {
-    this.reversedx();
-  }
-  if (this.surface.y+this.diameter >= 480 || this.surface.y <= 0) {
-    this.reversedy();
-  }
-};
-
-ball.prototype.draw = function() {
-  this.surface.update();
-};
-
-ball.prototype.reversedy = function() {
-  this.dy *= -1;
-};
-
-ball.prototype.reversedx = function() {
-  this.dx *= -1;
-};
-
-var g = new JSGame();
-
-g.game({
-  options: {
+  this.options = {
     width: 640,
     height: 480
-  },
-  init: function() {
-    g.state.ball = new ball(20,20,50);
-    g.bindKey(g.key.left, function() { g.state.ball.reversedx(); });
-    g.bindKey(g.key.right, function() { g.state.ball.reversedx(); });
-    
-    g.bindKey(g.key.up, function() { g.state.ball.reversedy(); });
-    g.bindKey(g.key.down, function() { g.state.ball.reversedy(); });
-  },
-  update: function() {
-    g.state.ball.update();
-  },
-  draw: function() {
-    g.state.ball.draw();
-  }
+  };
+
+  this.init = function() {
+    surf.bindToStage();
+    surf.colorFill(255,0,0,1);
+    surf.round(100);
+  };
+
+  this.update = function() {
+
+  };
+
+  this.draw = function() {
+    surf.update();
+  };
 });
