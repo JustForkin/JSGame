@@ -12,15 +12,23 @@ var ball = function(x,y,diameter) {
 ball.prototype.update = function() {
   this.surface.translate(this.dx, this.dy, 0, this.da);
   if (this.surface.x+this.diameter >= 640 || this.surface.x <= 0) {
-    this.dx *= -1;
+    this.reversedx();
   }
   if (this.surface.y+this.diameter >= 480 || this.surface.y <= 0) {
-    this.dy *= -1;
+    this.reversedy();
   }
 };
 
 ball.prototype.draw = function() {
   this.surface.update();
+};
+
+ball.prototype.reversedy = function() {
+  this.dy *= -1;
+};
+
+ball.prototype.reversedx = function() {
+  this.dx *= -1;
 };
 
 var g = new JSGame();
@@ -32,6 +40,11 @@ g.game({
   },
   init: function() {
     g.state.ball = new ball(20,20,50);
+    g.bindKey(g.key.left, function() { g.state.ball.reversedx(); });
+    g.bindKey(g.key.right, function() { g.state.ball.reversedx(); });
+    
+    g.bindKey(g.key.up, function() { g.state.ball.reversedy(); });
+    g.bindKey(g.key.down, function() { g.state.ball.reversedy(); });
   },
   update: function() {
     g.state.ball.update();
