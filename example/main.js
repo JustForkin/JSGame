@@ -1,16 +1,16 @@
 var ball = function(x,y,diameter) {
   this.dx = 6;
   this.dy = 6;
+  this.da = 1;
   this.diameter = diameter;
 
   this.surface = new Surface(x,y,diameter,diameter);
-  this.surface.round(100);
   this.surface.colorFill(255,0,0,1);
   this.surface.bindToStage();
 }
 
 ball.prototype.update = function() {
-  this.surface.translate(this.dx, this.dy);
+  this.surface.translate(this.dx, this.dy, 0, this.da);
   if (this.surface.x+this.diameter >= 640 || this.surface.x <= 0) {
     this.dx *= -1;
   }
