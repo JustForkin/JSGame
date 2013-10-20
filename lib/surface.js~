@@ -1,0 +1,45 @@
+Surface = function(x, y, w, h, customClass) {
+  this.x = x;
+  this.y = y;
+  this.w = w;
+  this.h = h;
+
+  this.styles = {
+    margin: 0,
+    padding: 0,
+    background: 'none',
+    position: 'relative',
+    'top': this.x,
+    'left': this.y,
+    width: this.w+'px',
+    height: this.h+'px'
+  };
+
+  this.id = uid();
+  
+  if (customClass !== undefined) {
+    this.domString = '<div id="jsg'+this.id+'" class="'+customClass+'"></div>';
+  } else {
+    this.domString = '<div id="jsg'+this.id+'"></div>';
+  }
+
+};
+
+Surface.prototype.update = function() {
+  // update the css of the object
+  $('#jsg'+this.id).css(this.styles);
+};
+
+Surface.prototype.bindToStage = function() {
+  // insert the dom element
+  $('#game-stage').append(this.domString);
+};
+
+Surface.prototype.setPosition = function(x, y) {
+  // change the (x, y) properties and update the css
+  this.x = x;
+  this.y = y;
+  this.styles['left'] = x;
+  this.styles['top'] = this.y;
+};
+
