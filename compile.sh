@@ -5,6 +5,7 @@ cat ./lib/JSGame.js >> temp.js
 cat ./lib/utilities.js >> temp.js
 cat ./lib/surface.js >> temp.js
 cat ./lib/keycodes.js >> temp.js
+cat ./lib/rect.js >> temp.js
 cat ./lib/game.js >> temp.js
 cat temp.js | sed -e "s|/\*\(\\\\\)\?\*/|/~\1~/|g" -e "s|/\*[^*]*\*\+\([^/][^*]*\*\+\)*/||g" \
     -e "s|\([^:/]\)//.*$|\1|" -e "s|^//.*$||" | tr '\n' ' ' | \
